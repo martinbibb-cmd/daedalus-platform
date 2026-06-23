@@ -1,5 +1,6 @@
 import type { Env } from "../../types/env";
 import type { Property, PropertyCreateInput } from "../../types/property";
+import { validatePropertyCreateAgainstPropertyRootContract } from "../contracts/propertyRoot";
 
 type PropertyRow = {
   property_id: string;
@@ -32,16 +33,14 @@ export async function createProperty(
     return badRequest("Expected a JSON request body.");
   }
 
-  const propertyId = input.propertyId?.trim();
-  if (!propertyId) {
-    return badRequest("propertyId is required.");
+  const propertyValidation =
+    validatePropertyCreateAgainstPropertyRootContract(input);
+  if (!propertyValidation.success) {
+    return badRequest(propertyValidation.message);
   }
 
-  const propertyName = input.propertyName?.trim();
-  if (!propertyName) {
-    return badRequest("propertyName is required.");
-  }
-
+  const propertyId = input.propertyId!.trim();
+  const propertyName = input.propertyName!.trim();
   const now = new Date().toISOString();
 
   await env.DB.prepare(

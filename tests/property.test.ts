@@ -108,4 +108,22 @@ describe("property routes", () => {
 
     expect(response.status).toBe(400);
   });
+
+  it("rejects property creation that tries to use a user as ownership root", async () => {
+    const response = await worker.fetch(
+      new Request("https://platform.test/property", {
+        method: "POST",
+        body: JSON.stringify({
+          propertyId: "test-property-001",
+          propertyName: "Martin Test Property",
+          userId: "user-001"
+        })
+      }),
+      createEnv()
+    );
+    const body = (await response.json()) as { message: string };
+
+    expect(response.status).toBe(400);
+    expect(body.message).toContain("Property is the ownership root");
+  });
 });
