@@ -1,0 +1,14 @@
+name = "daedalus-platform"
+main = "src/index.ts"
+compatibility_date = "2026-06-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "daedalus-platform"
+database_id = "replace-with-cloudflare-d1-database-id"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "EVIDENCE_BUCKET"
+bucket_name = "daedalus-evidence"
+

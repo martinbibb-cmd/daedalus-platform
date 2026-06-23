@@ -1,0 +1,20 @@
+{
+  "name": "daedalus-platform",
+  "version": "0.1.0",
+  "description": "Property-first platform services for Daedalus. Synchronization, storage, imports, and Property Twin lifecycle management.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260620.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.20.0"
+  }
+}
+
