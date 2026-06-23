@@ -1,5 +1,7 @@
 # Daedalus Platform
 
+Property-first platform services for Daedalus. Hosts Property identities, Twins, imports, synchronization, storage orchestration, and platform APIs. Reality -> Analysis -> Explanation.
+
 Daedalus Platform provides the active cloud services for the Daedalus ecosystem.
 
 ## Responsibilities
@@ -75,4 +77,3 @@ Create and apply a local D1 database:
 npx wrangler d1 create daedalus-platform
 npx wrangler d1 migrations apply daedalus-platform --local
 ```
-
