@@ -11,6 +11,7 @@ Create the first working platform slice for Daedalus: a Property can be created,
 - `POST /property`
 - `GET /property/:id`
 - Property stored successfully
+- No users, organisations, auth, permissions, billing, Twins, evidence uploads, or sync engine
 
 ## API
 
@@ -20,9 +21,8 @@ Request:
 
 ```json
 {
-  "displayName": "1 Example Street",
-  "uprn": "100000000001",
-  "address": "1 Example Street, Exampletown"
+  "propertyId": "test-property-001",
+  "propertyName": "Martin Test Property"
 }
 ```
 
@@ -31,12 +31,9 @@ Response:
 ```json
 {
   "property": {
-    "id": "generated-id",
-    "displayName": "1 Example Street",
-    "uprn": "100000000001",
-    "address": "1 Example Street, Exampletown",
-    "createdAt": "2026-06-23T00:00:00.000Z",
-    "updatedAt": "2026-06-23T00:00:00.000Z"
+    "propertyId": "test-property-001",
+    "propertyName": "Martin Test Property",
+    "createdAt": "2026-06-23T00:00:00.000Z"
   }
 }
 ```
@@ -44,4 +41,3 @@ Response:
 ### `GET /property/:id`
 
 Returns the stored Property or `404` when no Property exists for the ID.
-

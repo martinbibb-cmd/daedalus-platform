@@ -1,15 +1,10 @@
 export interface Property {
-  id: string;
-  displayName: string;
-  uprn: string | null;
-  address: string | null;
+  propertyId: string;
+  propertyName: string;
   createdAt: string;
-  updatedAt: string;
 }
 
 export interface PropertyCreateInput {
-  displayName?: string;
-  uprn?: string;
-  address?: string;
+  propertyId?: string;
+  propertyName?: string;
 }
-

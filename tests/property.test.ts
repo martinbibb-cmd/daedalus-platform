@@ -1,22 +1,18 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import worker from "../src/index";
 import type { Env } from "../types/env";
 
 type StoredProperty = {
-  id: string;
-  display_name: string;
-  uprn: string | null;
-  address: string | null;
+  property_id: string;
+  property_name: string;
   created_at: string;
-  updated_at: string;
 };
 
 type PropertyResponse = {
   property: {
-    id: string;
-    displayName: string;
-    uprn: string | null;
-    address: string | null;
+    propertyId: string;
+    propertyName: string;
+    createdAt: string;
   };
 };
 
@@ -38,14 +34,11 @@ class TestStatement {
       throw new Error(`Unexpected run SQL: ${this.sql}`);
     }
 
-    const [id, displayName, uprn, address, createdAt, updatedAt] = this.params;
-    this.store.set(String(id), {
-      id: String(id),
-      display_name: String(displayName),
-      uprn: uprn === null ? null : String(uprn),
-      address: address === null ? null : String(address),
-      created_at: String(createdAt),
-      updated_at: String(updatedAt)
+    const [propertyId, propertyName, createdAt] = this.params;
+    this.store.set(String(propertyId), {
+      property_id: String(propertyId),
+      property_name: String(propertyName),
+      created_at: String(createdAt)
     });
 
     return { success: true };
@@ -69,24 +62,19 @@ function createEnv(): Env {
         return new TestStatement(sql, store);
       }
     } as unknown as D1Database,
-    EVIDENCE_BUCKET: {} as R2Bucket
+    EVIDENCE: {} as R2Bucket
   };
 }
 
 describe("property routes", () => {
   it("creates and retrieves a property", async () => {
-    vi.spyOn(crypto, "randomUUID").mockReturnValue(
-      "11111111-1111-4111-8111-111111111111"
-    );
-
     const env = createEnv();
     const createResponse = await worker.fetch(
       new Request("https://platform.test/property", {
         method: "POST",
         body: JSON.stringify({
-          displayName: "1 Example Street",
-          uprn: "100000000001",
-          address: "1 Example Street, Exampletown"
+          propertyId: "test-property-001",
+          propertyName: "Martin Test Property"
         })
       }),
       env
@@ -96,7 +84,7 @@ describe("property routes", () => {
 
     const getResponse = await worker.fetch(
       new Request(
-        "https://platform.test/property/11111111-1111-4111-8111-111111111111"
+        "https://platform.test/property/test-property-001"
       ),
       env
     );
@@ -104,18 +92,16 @@ describe("property routes", () => {
 
     expect(getResponse.status).toBe(200);
     expect(body.property).toMatchObject({
-      id: "11111111-1111-4111-8111-111111111111",
-      displayName: "1 Example Street",
-      uprn: "100000000001",
-      address: "1 Example Street, Exampletown"
+      propertyId: "test-property-001",
+      propertyName: "Martin Test Property"
     });
   });
 
-  it("rejects property creation without a displayName", async () => {
+  it("rejects property creation without a propertyName", async () => {
     const response = await worker.fetch(
       new Request("https://platform.test/property", {
         method: "POST",
-        body: JSON.stringify({ address: "Missing name" })
+        body: JSON.stringify({ propertyId: "test-property-001" })
       }),
       createEnv()
     );

@@ -50,6 +50,7 @@ Acceptance criteria:
 - `POST /property`
 - `GET /property/:id`
 - Property stored successfully
+- Property schema only includes `property_id`, `property_name`, and `created_at`
 
 ## Local Development
 
@@ -74,6 +75,5 @@ npm run dev
 Create and apply a local D1 database:
 
 ```sh
-npx wrangler d1 create daedalus-platform
-npx wrangler d1 migrations apply daedalus-platform --local
+npx wrangler d1 migrations apply daedalusplatformdev --local
 ```
