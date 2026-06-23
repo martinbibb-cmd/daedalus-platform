@@ -5,7 +5,7 @@ compatibility_date = "2026-06-23"
 [[d1_databases]]
 binding = "DB"
 database_name = "daedalusplatformdev"
-database_id = "replace-with-cloudflare-d1-database-id"
+database_id = "acdbe9f0-464c-489c-b03d-0611cca13f7f"
 migrations_dir = "migrations"
 
 [[r2_buckets]]
