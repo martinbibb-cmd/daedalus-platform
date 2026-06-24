@@ -17,6 +17,6 @@
     "wrangler": "^4.20.0"
   },
   "dependencies": {
-    "@atlas/contracts-daedalus": "file:../Daedalus-contracts"
+    "zod": "^3.22.4"
   }
 }

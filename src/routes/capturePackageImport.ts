@@ -2,7 +2,7 @@ import {
   DaedalusPackageV4Schema,
   identifyDaedalusPackageForUpgrade,
   type DaedalusPackageV4
-} from "@atlas/contracts-daedalus";
+} from "../contracts/daedalusPackageV4";
 import type { Env } from "../../types/env";
 
 type ImportSummary = {
