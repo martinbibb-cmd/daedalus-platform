@@ -4,6 +4,8 @@ Property-first platform services for Daedalus. Hosts Property identities, Twins,
 
 Daedalus Platform provides the active cloud services for the Daedalus ecosystem.
 
+The repo-local build-plan projection lives in [DAEDALUS_BUILD_PLAN.md](DAEDALUS_BUILD_PLAN.md).
+
 ## Responsibilities
 
 - Property identity management
