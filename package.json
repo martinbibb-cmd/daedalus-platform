@@ -15,6 +15,8 @@
     "typescript": "^5.8.3",
     "vitest": "^3.2.4",
     "wrangler": "^4.20.0"
+  },
+  "dependencies": {
+    "@atlas/contracts-daedalus": "file:../Daedalus-contracts"
   }
 }
-
